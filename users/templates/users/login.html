@@ -1,0 +1,27 @@
+{% extends 'cubeapp/base.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+{% block title2 %}
+    авторизация
+{% endblock %}
+{% load  static %}
+{% block content %}
+    <form action="{% url 'login' %}" method="post" class="content__auth">
+        <h2>Вход</h2>
+        {% csrf_token %}
+        {% if form.errors %}
+            <error>Введённые имя пользователя и пароль не совпадают</error>
+        {% endif %}
+        {{ form.username }}
+        {{ form.password }}
+        {#        <input placeholder="Почта" type="email">#}
+        {#        <input placeholder="Пароль" type="password">#}
+        <button class="content__auth-btn" type="submit">Войти</button>
+        <a href="{% url 'registration' %}"><p>Нет аккаунта? <span>Зарегистрироваться</span></p></a>
+        {#        {% if {{form.has_error}} %}}#}
+        {#        <span style="color: #E30137">Такого пользователя не существует</span>#}
+        {#        {% endif %}#}
+    </form>
+{% endblock %}

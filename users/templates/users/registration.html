@@ -1,0 +1,25 @@
+{% extends 'cubeapp/base.html' %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+{% block title2 %}
+    авторизация
+{% endblock %}
+{% load  static %}
+{% block content %}
+    <form action="{% url 'registration' %}" method="post" class="content__auth">
+        <h2>Регистрация</h2>
+        {% csrf_token %}
+        {{ form.email }}
+        {{ form.username }}
+        {{ form.password1 }}
+        {{ form.password2 }}
+        <errors>{{ form.errors }}</errors>
+{#        <input placeholder="Почта" type="email" autocomplete="off">#}
+{#        <input placeholder="Логин" type="text" autocomplete="off">#}
+{#        <input placeholder="Пароль" type="password" autocomplete="off" >#}
+        <button class="content__auth-btn" type="submit">Создать аккаунт</button>
+        <a href='{% url 'login' %}'><p>Есть аккаунт? <span>Войти</span></p></a>
+    </form>
+{% endblock %}
