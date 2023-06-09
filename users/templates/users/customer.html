@@ -1,10 +1,10 @@
 {% extends 'cubeapp/base.html' %}
 
 {% block title %}
-    Главная страница
+    {{ customer.username }}
 {% endblock %}
 {% block title2 %}
-    последние видео
+    видео пользователя {{ customer.username }}
 {% endblock %}
 {% load  static %}
 {% block content %}

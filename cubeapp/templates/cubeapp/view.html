@@ -1,0 +1,57 @@
+{% extends 'cubeapp/base.html' %}
+
+{% block title %}
+    cube: {{ video.title }}
+{% endblock %}
+{% block title2 %}
+    просмотр видео
+{% endblock %}
+{% block content %}
+    <div class="content__video">
+        <div class="content__video-vid">
+            <div class="content__video-vid-preview">
+                <img src="{{ video.image.url }}" alt="preview">
+            </div>
+
+            <div class="content__video-vid-title">
+                <h2>{{ video.title }}</h2>
+                <p>{{ video.get_view_count }}</p>
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.49975 10.1136C5.60426 10.1136 2.9969 8.49948 1.43606 5.95451C2.9969 3.40953 5.60426 1.79541 8.49975 1.79541C11.3952 1.79541 14.0026 3.40953 15.5634 5.95451C14.0026 8.49948 11.3953 10.1136 8.49975 10.1136Z"
+                          stroke="black" stroke-opacity="0.5" stroke-width="2.5"/>
+                    <circle cx="8.4998" cy="5.95439" r="1.54545" fill="black" fill-opacity="0.5"/>
+                </svg>
+                <p>{{ video.create_at }}</p>
+            </div>
+
+            <a class="content__video-vid-creator" href="{{ video.username.get_absolute_url }}">
+                <p>{{ video.username }}</p>
+                <span></span>
+            </a>
+        </div>
+
+
+        <div class="content__video-comments">
+            <h2>Комментарии: {{ video.comment_set.count }}</h2>
+            {% if user.is_authenticated %}
+                <form action="{% url 'add_comment' video.id %}" method="post" class="content__video-comments-new">
+                    {% csrf_token %}
+                    <input placeholder="Введите комментарий" type="text" name="text">
+                    <button type="submit">
+                        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 6.5L1.3391e-06 13L3.55556 6.5L1.90735e-06 -6.99382e-07L16 6.5Z" fill="black"/>
+                        </svg>
+                    </button>
+                    <!-- if len(input) > 0 -->
+                </form>
+            {% endif %}
+            {% for comment in comments %}
+                <div class="content__video-comments-comment">
+                    <a href={{ comment.username.get_absolute_url }}>{{ comment.username }} {{ comment.create_at }}</a>
+                    <span></span>
+                    <p>{{ comment.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -3,6 +3,7 @@ from .models import User
 from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib import auth, messages
 from django.urls import reverse
+from cubeapp.models import Video
 
 
 # Create your views here.
@@ -37,4 +38,13 @@ def registration(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def customer(request, pk):
+    user = User.objects.get(id=pk)
+    context = {
+        'customer': User.objects.get(id=pk),
+        'videos': Video.objects.filter(username=user)
+    }
+    return render(request, 'users/customer.html', context)

@@ -35,12 +35,14 @@
     <p class="header__nav"><span style="color: #E30137">/</span> {% block title2 %} {% endblock %}</p>
     {% if user.is_authenticated %}
         <div class="header__logged">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="6" width="2" height="10" fill="white"/>
-                <rect x="16" y="10" width="2" height="10" transform="rotate(90 16 10)" fill="white"/>
-                <rect x="1" y="1" width="20" height="20" stroke="white" stroke-width="2"/>
-            </svg>
-            <a class="header__logged-name" href='{% url 'logout' %}'>
+            <a href="{% url 'upload' %}">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="6" width="2" height="10" fill="white"/>
+                    <rect x="16" y="10" width="2" height="10" transform="rotate(90 16 10)" fill="white"/>
+                    <rect x="1" y="1" width="20" height="20" stroke="white" stroke-width="2"/>
+                </svg>
+            </a>
+            <a class="header__logged-name" href='{{ user.get_absolute_url }}'>
                 <p>{{ user }}</p>
                 <span></span>
             </a>

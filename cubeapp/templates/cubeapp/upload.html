@@ -1,0 +1,19 @@
+{% extends 'cubeapp/base.html' %}
+
+{% block title %}
+    Загрузка видео
+{% endblock %}
+{% block title2 %}
+    загрузка видео
+{% endblock %}
+{% block content %}
+    <form action="{% url 'upload' %}" method="post" class="content__auth">
+        <h2>Загрузка видео</h2>
+        {% csrf_token %}
+        {{ form.title }}
+        {{ form.description }}
+        {{ form.image }}
+        <errors>{{ form.errors }}</errors>
+        <button class="content__auth-btn" type="submit">Загрузить</button>
+    </form>
+{% endblock %}
