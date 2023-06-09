@@ -13,6 +13,12 @@
         {% csrf_token %}
         {% if form.errors %}
             <error>Введённые имя пользователя и пароль не совпадают</error>
+        {% else %}
+        {% if messages %}
+            {% for message in messages %}
+            <error>{{message}}</error>
+            {% endfor %}
+        {% endif %}
         {% endif %}
         {{ form.username }}
         {{ form.password }}

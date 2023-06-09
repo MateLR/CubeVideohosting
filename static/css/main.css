@@ -27,6 +27,8 @@ input:-webkit-autofill {
 -webkit-text-fill-color: rgba(0, 0, 0, 0.4) !important;}
 button {
     padding: 0;
+    border: none;
+    background: none;
 }
 a, a:hover, a:active {
     overflow-wrap: break-word;
@@ -110,7 +112,7 @@ p, h1, h2, h3, h4, h5, h6 {
 .header__logged {
     height: 100%;
     display: grid;
-    grid-template-columns: 1.1458333333vw 1fr;
+    grid-template-columns: 1.1458333333vw 1fr 1fr;
     gap: 2.6041666667vw;
     align-items: center;
 }
@@ -247,11 +249,6 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .content__auth input:focus {
     background: url("/static/images/inputFocus.svg") 0 0/100% 100% no-repeat;
-}
-button {
-    padding: 0;
-    border: none;
-    background: none;
 }
 .content__auth-btn {
     display: flex;
