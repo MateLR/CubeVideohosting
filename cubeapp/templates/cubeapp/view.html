@@ -10,7 +10,22 @@
     <div class="content__video">
         <div class="content__video-vid">
             <div class="content__video-vid-preview">
-                <img src="{{ video.image.url }}" alt="preview">
+                <video
+                        id="my-video"
+                        class="video-js"
+                        controls
+                        preload="auto"
+                        width="1280"
+                        height="720"
+                        poster="{{ video.image.url }}"
+                        data-setup="{}"
+                        height="200" width="350"
+                >
+                    <source src="{{ video.file.url }}" type="video/mp4" alt="video"/>
+                    <source src="{{ video.file.url }}" type="video/webm"/>
+                    <source src="{{ video.file.url }}" type="video/mkv"/>
+                    <source src="{{ video.file.url }}" type="video/avi"/>
+                </video>
             </div>
 
             <div class="content__video-vid-title">
@@ -27,6 +42,9 @@
             <a class="content__video-vid-creator" href="{{ video.username.get_absolute_url }}">
                 <p>{{ video.username }}</p>
                 <span></span>
+            </a>
+            <a class="content__video-vid-creator">
+                <p>{{ video.description }}</p>
             </a>
         </div>
 

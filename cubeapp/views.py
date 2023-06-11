@@ -6,6 +6,7 @@ from django.views.generic.base import View
 from .mixins import ViewCountMixin
 from .forms import UploadVideoForm
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 
 
 # Create your views here.
@@ -31,7 +32,7 @@ class VideoView(View, ViewCountMixin):
 
 
 class AddComment(VideoView):
-    @login_required(login_url='/users/login')
+
     def post(self, request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -45,13 +46,13 @@ class AddComment(VideoView):
 @login_required(login_url='/users/login')
 def upload(request):
     if request.method == 'POST':
-        form = UploadVideoForm(data=request.POST)
+        form = UploadVideoForm(request.POST, request.FILES)
         if form.is_valid():
-            print(request.FILES)
             video = Video(username=request.user,
                           title=request.POST.get('title'),
                           description=request.POST.get('description'),
-                          image=request.POST.get('image'),
+                          image=request.FILES['image'],
+                          file=request.FILES['video']
                           )
 
             video.save()

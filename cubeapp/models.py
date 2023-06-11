@@ -3,15 +3,17 @@ from django.core.validators import FileExtensionValidator
 from users.models import User
 from django.urls import reverse
 from django.utils.timezone import now
+from .validators import *
 
 
 class Video(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     title = models.CharField(max_length=40, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
-    image = models.ImageField(upload_to='images/', verbose_name='Превью')
-    # file = models.FileField(upload_to='video/', validators=[FileExtensionValidator(allowed_extensions=['mp4'])],
-    #                         verbose_name='Видеофайл')
+    image = models.ImageField(upload_to='images/', verbose_name='Превью',
+                              validators=[validate_image, validate_file_size])
+    file = models.FileField(upload_to='video/', validators=[validate_video, validate_file_size],
+                            verbose_name='Видеофайл')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
 
     # url = models.URLField(unique=True)

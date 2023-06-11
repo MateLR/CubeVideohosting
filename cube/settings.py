@@ -9,12 +9,27 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+# AWS_ACCESS_KEY_ID = 'hJeeuTLVFNkr49i5R2uEG5'
+# AWS_SECRET_ACCESS_KEY = 'gf7XT7rtANXLjUjcgaNUd1BwGnocrP17RoEZMm3JDEvZ'
+AWS_STORAGE_BUCKET_NAME = 'cubevideos'
+AWS_ENDPOINT_URL = 'hb.bizmrg.com'
+AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
+AWS_SERVICE_NAME = 's3'
+AWS_S3_CUSTOM_DOMAIN = '%s.hb.bizmrg.com' % AWS_STORAGE_BUCKET_NAME
+AWS_LOCATION = 'static'
+#https://cubevideos.hb.bizmrg.com/media/images/MOVI0016.avi
+STATIC_URL = 'https://%s/%s/static/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIA_URL = 'https://%s/%s/media/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+#STATIC_ROOT = 'https://%s/%s/static/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_STORAGE = 'cube.storage.MediaStorage'
+DEFAULT_FILE_STORAGE = 'cube.storage.MediaStorage'
+AWS_S3_REGION_NAME = 'ru-msk'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -35,9 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'cubeapp',
     'users',
-    # 'storages',
 ]
 
 MIDDLEWARE = [
@@ -109,17 +124,15 @@ TIME_ZONE = 'Asia/Yekaterinburg'
 USE_I18N = True
 
 USE_TZ = True
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/ 'media'
+#STATIC_URL = 'static/'
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR/ 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
