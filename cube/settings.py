@@ -21,7 +21,7 @@ STATICFILES_STORAGE = 'cube.storage.MediaStorage'
 DEFAULT_FILE_STORAGE = 'cube.storage.MediaStorage'
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lix^kdw#0n&mfu(b_ctue@9r51q)vx!&)(6yreen8miszxrk*('
+SECRET_KEY = django_secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
