@@ -10,28 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
+from .keys import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
-# AWS_ACCESS_KEY_ID = 'hJeeuTLVFNkr49i5R2uEG5'
-# AWS_SECRET_ACCESS_KEY = 'gf7XT7rtANXLjUjcgaNUd1BwGnocrP17RoEZMm3JDEvZ'
-AWS_STORAGE_BUCKET_NAME = 'cubevideos'
-AWS_ENDPOINT_URL = 'hb.bizmrg.com'
-AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
-AWS_SERVICE_NAME = 's3'
-AWS_S3_CUSTOM_DOMAIN = '%s.hb.bizmrg.com' % AWS_STORAGE_BUCKET_NAME
-AWS_LOCATION = 'static'
-#https://cubevideos.hb.bizmrg.com/media/images/MOVI0016.avi
-STATIC_URL = 'https://%s/%s/static/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-MEDIA_URL = 'https://%s/%s/media/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-#STATIC_ROOT = 'https://%s/%s/static/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_STORAGE = 'cube.storage.MediaStorage'
+# S3 Yandex Cloud Storages
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIA_URL = 'https://%s/media/' % (AWS_S3_CUSTOM_DOMAIN)
+STATICFILES_STORAGE = 'cube.storage.MediaStorage'
 DEFAULT_FILE_STORAGE = 'cube.storage.MediaStorage'
-AWS_S3_REGION_NAME = 'ru-msk'
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-lix^kdw#0n&mfu(b_ctue@9r51q)vx!&)(6yreen8miszxrk*('
@@ -124,9 +111,11 @@ TIME_ZONE = 'Asia/Yekaterinburg'
 USE_I18N = True
 
 USE_TZ = True
+
+# Default Storages
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-#STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 # STATICFILES_DIRS = [BASE_DIR / 'static']
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR/ 'media'
