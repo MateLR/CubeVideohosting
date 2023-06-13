@@ -18,6 +18,6 @@ def validate_image(value):
 
 
 def validate_file_size(value):
-    limit = 1000 * 1024 * 1024
+    limit = 4000 * 1024 * 1024
     if value.size > limit:
         raise ValidationError('Файл слишком большой')

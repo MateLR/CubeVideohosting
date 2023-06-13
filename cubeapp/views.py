@@ -22,6 +22,9 @@ def index(request):
 class VideoView(View, ViewCountMixin):
     def get(self, request, pk):
         video = Video.objects.get(id=pk)
+        user = request.user
+        if user.is_authenticated and user not in video.viewed.all():
+            video.viewed.add(user)
         context = {
             # 'user' : [User]
             # 'usernames': ['kar', 'unclear legacy', 'lender', 'cyreh', 'cyreh', 'cyreh', 'cyreh', 'cyreh']

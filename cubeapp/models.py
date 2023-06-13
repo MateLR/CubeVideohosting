@@ -17,6 +17,7 @@ class Video(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     likes = models.ManyToManyField(User, related_name="likes", blank=True)
     dislikes = models.ManyToManyField(User, related_name="dislikes", blank=True)
+    viewed = models.ManyToManyField(User, related_name="views", blank=True)
     # url = models.URLField(unique=True)
 
     def __str__(self):
