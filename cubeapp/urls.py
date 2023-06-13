@@ -8,6 +8,8 @@ urlpatterns = [
     path('view/<int:pk>/', views.VideoView.as_view(), name='view'),
     path('comment/<int:pk>/', views.AddComment.as_view(), name='add_comment'),
     path('upload/', views.upload, name='upload'),
+    path('view/<int:pk>/like', views.like, name='like'),
+    path('view/<int:pk>/dislike', views.dislike, name='dislike')
 ]
 
 if settings.DEBUG:

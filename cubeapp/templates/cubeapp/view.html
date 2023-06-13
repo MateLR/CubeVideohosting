@@ -31,19 +31,80 @@
             <div class="content__video-vid-title">
                 <h2>{{ video.title }}</h2>
                 <p>{{ video.get_view_count }}</p>
-                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="content__video-vid-title-view-pic" width="17" height="12" viewBox="0 0 17 12" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.49975 10.1136C5.60426 10.1136 2.9969 8.49948 1.43606 5.95451C2.9969 3.40953 5.60426 1.79541 8.49975 1.79541C11.3952 1.79541 14.0026 3.40953 15.5634 5.95451C14.0026 8.49948 11.3953 10.1136 8.49975 10.1136Z"
                           stroke="black" stroke-opacity="0.5" stroke-width="2.5"/>
                     <circle cx="8.4998" cy="5.95439" r="1.54545" fill="black" fill-opacity="0.5"/>
                 </svg>
                 <p>{{ video.create_at }}</p>
+                {% if like %}
+                    <span class="content__video-vid-title-dislike-cnt">{{ video.likes.count }}</span>
+                {% else %}
+                    <span class="content__video-vid-title-like-cnt">{{ video.likes.count }}</span>
+                {% endif %}
+                <form method="POST" , action="{% url 'like' video.id %}">
+                    {% csrf_token %}
+                    <button type="submit">
+                        {% if like %}
+                            <svg class="content__video-vid-title-like-pic" width="24" height="22" viewBox="0 0 24 22"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.9084 12.0866L13.6643 19.2401C12.7799 20.2533 11.2201 20.2533 10.3357 19.2401L4.09154 12.0866C2.23276 9.95706 1.26709 7.27899 2.66365 4.72523C4.27721 1.77466 7.23388 1.1716 9.80321 3.15303C10.6867 3.83427 11.4118 4.61223 11.7659 5.01586C11.8889 5.15611 12.1111 5.15611 12.2341 5.01586C12.5882 4.61223 13.3133 3.83427 14.1968 3.15303C16.7661 1.1716 19.7228 1.77466 21.3364 4.72523C22.7329 7.27899 21.7673 9.95706 19.9084 12.0866Z"
+                                      stroke="#E30137" stroke-width="3" stroke-linejoin="round"/>
+                            </svg>
+
+                        {% else %}
+                            <svg class="content__video-vid-title-like-pic" width="24" height="23" viewBox="0 0 24 22"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.9084 12.0866L13.6643 19.2401C12.7799 20.2533 11.2201 20.2533 10.3357 19.2401L4.09154 12.0866C2.23276 9.95706 1.26709 7.27899 2.66365 4.72523C4.27721 1.77466 7.23388 1.1716 9.80321 3.15303C10.6867 3.83427 11.4118 4.61223 11.7659 5.01586C11.8889 5.15611 12.1111 5.15611 12.2341 5.01586C12.5882 4.61223 13.3133 3.83427 14.1968 3.15303C16.7661 1.1716 19.7228 1.77466 21.3364 4.72523C22.7329 7.27899 21.7673 9.95706 19.9084 12.0866Z"
+                                      stroke="black" stroke-width="3" stroke-linejoin="round"/>
+                            </svg>
+                        {% endif %}
+                    </button>
+                </form>
+                {% if dislike %}
+                    <span class="content__video-vid-title-dislike-cnt">{{ video.dislikes.count }}</span>
+                {% else %}
+                    <span class="content__video-vid-title-like-cnt">{{ video.dislikes.count }}</span>
+                {% endif %}
+                <form method="POST" , action="{% url 'dislike' video.id %}">
+                    {% csrf_token %}
+                    <button type="submit">
+                        {% if dislike %}
+                            <svg class="content__video-vid-title-dislike-pic" width="24" height="23" viewBox="0 0 24 23"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.048 4.22754C20.2352 4.38338 20.4128 4.5539 20.5792 4.73805C21.0446 5.25298 21.4138 5.8643 21.6656 6.5371C21.9175 7.20991 22.0471 7.93101 22.0471 8.65925C22.0471 9.38749 21.9175 10.1086 21.6656 10.7814C21.4138 11.4542 21.0446 12.0656 20.5792 12.5804L13.6762 20.2185C12.7918 21.197 11.2555 21.197 10.3711 20.2185L7.38045 16.9093"
+                                      stroke="#E30137" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22.0471 2L4.22762 19.8195" stroke="#E30137" stroke-width="3"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                                <path d="M15.1174 3.53588C14.5094 3.81457 13.9569 4.22304 13.4915 4.73798C12.706 5.6072 11.3413 5.6072 10.5557 4.73798C9.61585 3.69802 8.34109 3.11377 7.01187 3.11377C5.68275 3.11377 4.40799 3.69802 3.46812 4.73798C2.52815 5.77795 2.00013 7.18845 2.00013 8.65919C2.00013 10.13 2.52815 11.5404 3.46812 12.5804L4.47459 13.6941"
+                                      stroke="#E30137" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        {% else %}
+                            <svg class="content__video-vid-title-dislike-pic" width="24" height="23" viewBox="0 0 24 23"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.048 4.22754C20.2352 4.38338 20.4128 4.5539 20.5792 4.73805C21.0446 5.25298 21.4138 5.8643 21.6656 6.5371C21.9175 7.20991 22.0471 7.93101 22.0471 8.65925C22.0471 9.38749 21.9175 10.1086 21.6656 10.7814C21.4138 11.4542 21.0446 12.0656 20.5792 12.5804L13.6762 20.2185C12.7918 21.197 11.2555 21.197 10.3711 20.2185L7.38045 16.9093"
+                                      stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22.0471 2L4.22762 19.8195" stroke="black" stroke-width="3"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15.1174 3.53588C14.5094 3.81457 13.9569 4.22304 13.4915 4.73798C12.706 5.6072 11.3413 5.6072 10.5557 4.73798C9.61585 3.69802 8.34109 3.11377 7.01187 3.11377C5.68275 3.11377 4.40799 3.69802 3.46812 4.73798C2.52815 5.77795 2.00013 7.18845 2.00013 8.65919C2.00013 10.13 2.52815 11.5404 3.46812 12.5804L4.47459 13.6941"
+                                      stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                        {% endif %}
+                    </button>
+                </form>
             </div>
 
             <a class="content__video-vid-creator" href="{{ video.username.get_absolute_url }}">
                 <p>{{ video.username }}</p>
-                <span></span>
             </a>
-            <a class="content__video-vid-creator">
+            <a class="content__video-vid-desc">
                 <p>{{ video.description }}</p>
             </a>
         </div>
@@ -65,8 +126,10 @@
             {% endif %}
             {% for comment in comments %}
                 <div class="content__video-comments-comment">
-                    <a href={{ comment.username.get_absolute_url }}>{{ comment.username }} {{ comment.create_at }}</a>
-                    <span></span>
+                    <a href={{ comment.username.get_absolute_url }} class="content__video-comments-comment-user">
+                        <h3>{{ comment.username }}</h3>
+                        <h4>{{ comment.create_at }}</h4>
+                    </a>
                     <p>{{ comment.text }}</p>
                 </div>
             {% endfor %}

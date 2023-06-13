@@ -84,27 +84,27 @@ WSGI_APPLICATION = 'cube.wsgi.application'
 #     }
 # }
 # local database with postgres
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'cube',
-#         'USER': 'postgres',
-#         'PASSWORD': 'ruslik',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432'
-#     }
-# }
-#docker database with postgres
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cube',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'cube_db',
+        'PASSWORD': 'ruslik',
+        'HOST': '127.0.0.1',
         'PORT': '5432'
     }
 }
+#docker database with postgres
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'cube_db',
+#         'PORT': '5432'
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

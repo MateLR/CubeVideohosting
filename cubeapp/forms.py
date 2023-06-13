@@ -15,10 +15,17 @@ class UploadVideoForm(forms.Form):
                             widget=forms.TextInput(attrs={'placeholder': 'Название'}), required=True)
     image = forms.ImageField(label='Превью',
                              required=True, validators=[validate_image, validate_file_size])
-    video = forms.FileField(label='Видео',required=True,validators=[validate_video, validate_file_size])
+    video = forms.FileField(label='Видео', required=True, validators=[validate_video, validate_file_size])
     description = forms.CharField(label='Описание', max_length=300,
                                   widget=forms.TextInput(attrs={'placeholder': 'Описание'}), required=True)
 
+
+class LikeForm(forms.Form):
+    video_id = forms.IntegerField(widget=forms.HiddenInput(), )
+
+
+class DislikeForm(forms.Form):
+    video_id = forms.IntegerField(widget=forms.HiddenInput(), )
 # class UploadVideoForm(forms.ModelForm):
 #     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Введите название'}))
 #     description = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Введите описание'}))

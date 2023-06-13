@@ -26,7 +26,9 @@ class VideoView(View, ViewCountMixin):
             # 'user' : [User]
             # 'usernames': ['kar', 'unclear legacy', 'lender', 'cyreh', 'cyreh', 'cyreh', 'cyreh', 'cyreh']
             'video': video,
-            'comments': Comment.objects.filter(video=video).order_by("-id")
+            'comments': Comment.objects.filter(video=video).order_by("-id"),
+            'like': request.user in video.likes.all(),
+            'dislike': request.user in video.dislikes.all()
         }
         return render(request, 'cubeapp/view.html', context)
 
@@ -62,3 +64,27 @@ def upload(request):
         form = UploadVideoForm()
     context = {'form': form}
     return render(request, 'cubeapp/upload.html', context)
+
+
+@login_required(login_url='/users/login')
+def like(request, pk):
+    video = Video.objects.get(id=pk)
+    if request.user in video.likes.all():
+        video.likes.remove(request.user)
+    else:
+        video.likes.add(request.user)
+        if request.user in video.dislikes.all():
+            video.dislikes.remove(request.user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='/users/login')
+def dislike(request, pk):
+    video = Video.objects.get(id=pk)
+    if request.user in video.dislikes.all():
+        video.dislikes.remove(request.user)
+    else:
+        video.dislikes.add(request.user)
+        if request.user in video.likes.all():
+            video.likes.remove(request.user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

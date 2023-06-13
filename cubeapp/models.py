@@ -15,7 +15,8 @@ class Video(models.Model):
     file = models.FileField(upload_to='video/', validators=[validate_video, validate_file_size],
                             verbose_name='Видеофайл')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
-
+    likes = models.ManyToManyField(User, related_name="likes", blank=True)
+    dislikes = models.ManyToManyField(User, related_name="dislikes", blank=True)
     # url = models.URLField(unique=True)
 
     def __str__(self):
